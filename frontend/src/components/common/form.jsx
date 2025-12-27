@@ -109,7 +109,7 @@ function CommonForm({
             </div>
           ))}
         </div>
-        <Button type="submit" className="mt-2 w-full text-white !bg-blue-900 mt-5">
+        <Button type="submit" className="w-full text-white !bg-blue-900 mt-5">
           {buttonText || "Submit"}
         </Button>
       </form>
