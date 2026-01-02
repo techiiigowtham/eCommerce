@@ -7,8 +7,6 @@ import { loginUser } from '@/store/authSlice/authSlice'
 import { toast } from "sonner"
 
 
-
-
 const initialState = {
   email : '',
   passowrd : ''
@@ -16,11 +14,9 @@ const initialState = {
 
 
 const Authlogin = () => {
-
   const [formData, setFormData] = useState(initialState);
   const dispatch = useDispatch();
 
-  
   function onSubmit(event){
       event.preventDefault();
       dispatch(loginUser(formData)).then(data => {
