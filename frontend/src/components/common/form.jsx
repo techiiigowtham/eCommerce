@@ -6,6 +6,7 @@ import {
   SelectContent,
   SelectTrigger,
   SelectValue,
+  SelectItem  
 } from "../ui/select";
 import { Textarea } from "../ui/textarea";
 
@@ -19,7 +20,7 @@ function CommonForm({
 
   function renderInputs(getControlItem) {
     let element = null;
-    const value = formData[getControlItem.name] || "";
+    const value = formData[getControlItem.name];
     switch (getControlItem.componentType) {
       case "input":
         element = (
@@ -47,10 +48,10 @@ function CommonForm({
           value={value}>
             <SelectTrigger className='w-full'>
               <SelectValue
-                placeholder={getControlItem.placeholder}
+                placeholder={getControlItem.label}
               ></SelectValue>
             </SelectTrigger>
-            <SelectContent>
+            <SelectContent position="popper">
               {getControlItem.options && getControlItem.options.length > 0
                 ? getControlItem.options.map((optionItem) => (
                     <SelectItem key={optionItem.id} value={optionItem.id}>

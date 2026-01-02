@@ -31,7 +31,7 @@ function App() {
 
   console.log(isLoading, user);
 
-  // if (isLoading) return <Skeleton className="h-[600px] w-[600px] !bg-black" />;
+  if (isLoading) return <Skeleton className="h-[600px] w-[600px] !bg-black" />;
   return (
     <>
       <div className="flex flex-col overflow-hidden bg-white">
