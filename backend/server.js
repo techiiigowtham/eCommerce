@@ -4,6 +4,7 @@ const mongoose = require('mongoose');
 const cookieParser = require('cookie-parser');
 const cors = require('cors');
 const authRouter = require('./routes/auth/authRoute')
+const adminProductRouter = require('./routes/admin/productsRoutes')
 
 
 mongoose.connect('mongodb+srv://techigowtham_db_user:DpgSLJ7edo3xGKHK@cluster0.n1h56j9.mongodb.net/').then(() => console.log('MongoDB Connected')).catch(error => console.log(error))
@@ -29,5 +30,6 @@ app.use(
 app.use(cookieParser());
 app.use(express.json());
 app.use('/api/auth', authRouter);
+app.use('/api/admin/products', adminProductRouter);
 
 app.listen(PORT, ()=> console.log('Server is now Running on port 5000'))

@@ -7,7 +7,7 @@ router.post("/login", loginUser);
 router.post("/logout", logoutUser);
 router.get("/check-auth", authMiddleware, (req, res) => {
     const user = req.user;
-    res.status(200).json({
+    res.status(200).json({ 
         success : true,
         messgae : 'Authenticated user',
         user
