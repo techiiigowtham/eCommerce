@@ -6,8 +6,13 @@ import {
   SheetTitle,
 } from "@/components/ui/sheet";
 import { addProductFormElements } from "@/config/config";
-import React, { Fragment, useState } from "react";
+import React, { Fragment, useEffect, useState } from "react";
 import ProductUploadImage from "../adminView/imageUpload";
+import { useDispatch, useSelector } from "react-redux";
+import { addNewProduct, fetchAlllProducts } from "@/store/admin/productSlice";
+import { toast } from "sonner"
+
+
 
 const initialFormData = {
   image: null,
@@ -21,13 +26,37 @@ const initialFormData = {
 };
 
 const Adminproducts = () => {
-  const [openCreatesProductDialog, setOpenCreateProductDialog] =
-    useState(false);
+  const [openCreatesProductDialog, setOpenCreateProductDialog] = useState(false);
   const [formData, setFormData] = useState(initialFormData);
   const [imageFile, setImageFile] = useState(null);
   const [uploadedImageUrl, setUploadedImageUrl] = useState("");
+  const [imageLoading, setImageLoading] = useState(false);
+  const {productList} =  useSelector(state => state.adminProducts)
+  const dispatch = useDispatch();
 
-  function onSubmit() {}
+  function onSubmit(event) {
+    event.preventDefault();
+    dispatch(addNewProduct({
+      ...formData,
+      image : uploadedImageUrl
+    })).then((data) => {
+      // console.log(data, 'super')
+      if(data?.payload?.success){
+        dispatch(fetchAlllProducts());
+        setOpenCreateProductDialog(false)
+        setImageFile(null);
+        setFormData(initialFormData);
+        toast('product Added SuccessFully');
+        
+      }
+    })
+  }
+
+  useEffect(() => {
+    dispatch(fetchAlllProducts())
+  },[dispatch]);
+
+  // console.log(productList, 'list Products')
 
   return (
     <Fragment>
@@ -56,6 +85,8 @@ const Adminproducts = () => {
             setImageFile={setImageFile}
             uploadedImageUrl={uploadedImageUrl}
             setUploadedImageUrl={setUploadedImageUrl}
+            setImageLoading={setImageLoading}
+            imageLoading={imageLoading}
           />
             <CommonForm
               formControls={addProductFormElements}

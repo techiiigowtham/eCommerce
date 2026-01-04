@@ -29,7 +29,7 @@ function App() {
     dispatch(checkAuth());
   }, [dispatch]);
 
-  console.log(isLoading, user);
+  // console.log(isLoading, user);
 
   if (isLoading) return <Skeleton className="h-[600px] w-[600px] !bg-black" />;
   return (
